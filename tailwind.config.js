@@ -6,7 +6,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        brutal: '5px 5px',
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-zilla-slab)'],
+        roboto: ['var(--font-roboto)'],
+      }
+    },
   },
   plugins: [],
 }
