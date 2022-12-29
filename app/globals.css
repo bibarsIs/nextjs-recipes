@@ -15,3 +15,9 @@ body {
 input {
     border: 2px solid;
 }
+
+@layer base {
+    h2 {
+        @apply font-medium
+    }
+}

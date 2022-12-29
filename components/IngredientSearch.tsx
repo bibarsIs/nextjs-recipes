@@ -36,6 +36,7 @@ export default function IngredientSearch() {
     const [ingredient, setIngredient] = useState('')
 
     function findRecipes() {
+        //
     }
 
     // ingredient input change
@@ -59,8 +60,9 @@ export default function IngredientSearch() {
                        className='p-2 m-4'/>
             </form>
             <ButtonBrutal type="submit" onClick={findRecipes}>Search</ButtonBrutal>
-
-            <AddedIngredientsList addedIngredients={addedIngredients} setAddedIngredients={setAddedIngredients}></AddedIngredientsList>
+            <h2>Added ingredients: </h2>
+             <AddedIngredientsList addedIngredients={addedIngredients} setAddedIngredients={setAddedIngredients}/>
+            <h2>All ingredients: </h2>
             <IngredientsList ingredients={ingredients} setAddedIngredients={setAddedIngredients}></IngredientsList>
         </div>
 

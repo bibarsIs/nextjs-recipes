@@ -9,21 +9,24 @@ export default function AddedIngredientsList({addedIngredients, setAddedIngredie
     setAddedIngredients: React.Dispatch<React.SetStateAction<string[]>>,
 }) {
 
-    // adds ingredient to addedIngredients array
+    // removes addedIngredients array
     function handleRemoveIngredient(ingredient: string, event: React.MouseEvent<Element>) {
-        setAddedIngredients(prevState => {
-            return prevState.includes(ingredient) ? prevState : [...prevState, ingredient]
-        })
+        setAddedIngredients(addedIngredients.filter(word => word !== ingredient))
     }
 
-    return (
-        <ul className='inline-flex flex-row'>
-            {addedIngredients.map((ingredient) => {
-                return <AddedIngredientItem onClick={() => {
-                    setAddedIngredients(addedIngredients.filter(word => word !== ingredient))
-                }}
-                                       key={ingredient}>{ingredient}</AddedIngredientItem>
-            })}
-        </ul>
-    )
+    if (addedIngredients.length !== 0) {
+        return (
+            <ul className='inline-flex flex-row'>
+                {addedIngredients.map((ingredient) => {
+                    return <AddedIngredientItem
+                        onClick={(event) => handleRemoveIngredient(ingredient, event)}
+                        key={ingredient}>{ingredient}</AddedIngredientItem>
+                })}
+            </ul>
+        )
+    } else {
+        return (
+            <div className='font-light m-2'>None</div>
+        )
+    }
 }

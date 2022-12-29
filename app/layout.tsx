@@ -1,12 +1,12 @@
 import './globals.css'
 import React from "react";
-import {Inter, Zilla_Slab} from '@next/font/google'
+import {Inter} from '@next/font/google'
 import Navbar from "../components/Navbar";
 
 const inter = Inter({
     subsets: ['latin'],
-    weight: ['300', '400', '600', '900'],
-    variable: '--font-inter',
+    // weight: ['300', '400', '600', '900'],
+    //variable: '--font-inter',
 })
 
 //tailwind variable not yet working for me as of december 2022

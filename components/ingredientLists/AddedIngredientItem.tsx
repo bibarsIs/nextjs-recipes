@@ -5,6 +5,6 @@ export default function AddedIngredientItem({onClick, children}: {
     children: string
 }) {
     return (
-        <li onClick={onClick} className={`cursor-pointer font-light m-2`}>{children}</li>
+        <li onClick={onClick} className={`cursor-pointer select-none font-light m-2`}>{children}</li>
     );
 }
