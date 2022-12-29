@@ -5,14 +5,15 @@ import Navbar from "../components/Navbar";
 
 const inter = Inter({
     subsets: ['latin'],
-    variable: '--font-inter',
+    // weight: ['300', '400', '600', '900'],
+    //variable: '--font-inter',
 })
 
-// not yet working as of december 2022
+//tailwind variable not yet working for me as of december 2022
 /*const zillaSlab = Zilla_Slab({
     subsets: ['latin'],
     variable: '--font-zilla-slab',
-    weight: '300',
+    weight: '400',
 })
 
 const roboto = Roboto({

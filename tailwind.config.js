@@ -11,9 +11,10 @@ module.exports = {
         brutal: '5px 5px',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
+
+        sans: ['var(--font-inter)'], // doesn't seem to work yet
         serif: ['var(--font-zilla-slab)'],
-        roboto: ['var(--font-roboto)'],
+        // roboto: ['var(--font-roboto)'],
       }
     },
   },
