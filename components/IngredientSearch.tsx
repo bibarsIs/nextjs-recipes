@@ -1,13 +1,13 @@
 'use client'
 import {useForm, SubmitHandler} from "react-hook-form";
 import ButtonBrutal from "./buttons/ButtonBrutal";
-import {useEffect, useState} from "react";
-import AddedIngredient from "./AddedIngredient";
-import Button from "./buttons/Button";
+import React, {useEffect, useState} from "react";
+import IngredientsList from "./ingredientLists/IngredientsList";
+import AddedIngredientsList from "./ingredientLists/AddedIngredientsList";
 
 type Inputs = {
     example: string,
-    exampleRequired: string,
+    ingredient: string,
 };
 
 // fetch ingredients
@@ -21,59 +21,47 @@ async function getIngredients() {
 }
 
 export default function IngredientSearch() {
-    const {register, handleSubmit, formState: {errors}} = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
-
-    // map ingredients to datalist options\
-    const [ingredients, setIngredients] = useState([])
     useEffect(() => {
         getIngredients().then((data) => {
             setIngredients(data)
         })
     }, [])
 
-    const ingredientsOptions = ingredients.map((ingredient: string): JSX.Element => {
-        return (<option key={ingredient} value={ingredient}/>)
-    })
-
+    // all ingredients fetched from the api
+    const [ingredients, setIngredients] = useState([])
     // addedIngredients used for searching recipes
     const [addedIngredients, setAddedIngredients] = useState<string[]>([])
     // ingredient in the input
     const [ingredient, setIngredient] = useState('')
 
     function findRecipes() {
+    }
+
+    // ingredient input change
+    function handleIngredientChange(event: { target: { value: React.SetStateAction<string>; }; }) {
+        setIngredient(event.target.value)
+    }
+    // adds first filtered ingredient when user presses Enter key for convenience.
+    function addFirstFilteredIngredient(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
 
     }
 
-    // render
+// render
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className=''>
-                {/* include validation with required or other standard HTML validation rules */}
-                {ingredient}
-                <input {...register('exampleRequired', {required: true})} autoComplete='off' placeholder='Ingredient'
+            <form onSubmit={addFirstFilteredIngredient}>
+                <input type='text' autoComplete='off' placeholder='Ingredient'
                        value={ingredient}
-                       onChange={event => setIngredient(event.target.value)}
+                       onChange={handleIngredientChange}
                        list='ingredients'
                        className='p-2 m-4'/>
-                {/* errors will return when field validation fails  */}
-                {errors.exampleRequired && <span>This field is required</span>}
-
-                <datalist id='ingredients'>
-                    {ingredientsOptions}
-                </datalist>
-                <Button type="submit"
-                        onClick={() => setAddedIngredients([...addedIngredients, ingredient])}>Add</Button>
-
             </form>
-
             <ButtonBrutal type="submit" onClick={findRecipes}>Search</ButtonBrutal>
-            <ul className='inline-flex flex-row'>
-                {addedIngredients.map((ingredient) => {
-                    return <AddedIngredient key={ingredient} ingredient={ingredient}></AddedIngredient>
-                })}
-            </ul>
+
+            <AddedIngredientsList addedIngredients={addedIngredients} setAddedIngredients={setAddedIngredients}></AddedIngredientsList>
+            <IngredientsList ingredients={ingredients} setAddedIngredients={setAddedIngredients}></IngredientsList>
         </div>
 
     );
