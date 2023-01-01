@@ -1,9 +1,9 @@
 import {NextApiRequest, NextApiResponse} from 'next'
+import { faker } from '@faker-js/faker';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    res.status(200).json({
-        req: req.query,
-        recipes: [
+    res.status(200).json([
+        [
             {
                 'name' : 'omelette',
                 'ingredients': ['egg', 'ketchup'],
@@ -15,5 +15,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
                 'instructions': 'Mix together and fry'
             },
         ]
-    })
+    ])
 }

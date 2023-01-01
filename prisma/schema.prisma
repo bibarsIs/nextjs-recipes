@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Ingredient {
+  id      Int      @id @default(autoincrement())
+  title   String   @db.VarChar(255) @unique
+  recipes Recipe[]
+}
+
+model Recipe {
+  id           Int          @id @default(autoincrement())
+  title        String       @db.VarChar(255)
+  instructions String       @db.Text
+  ingredients  Ingredient[]
+  createdAt    DateTime     @default(now()) @db.Timestamp(6)
+}

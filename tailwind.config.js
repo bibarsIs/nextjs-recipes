@@ -10,12 +10,14 @@ module.exports = {
       boxShadow: {
         brutal: '5px 5px',
       },
+/*
       fontFamily: {
 
-        sans: ['var(--font-inter)'], // doesn't seem to work yet
-        serif: ['var(--font-zilla-slab)'],
+        // sans: ['var(--font-inter)'], // doesn't seem to work yet with turbopack
+        // serif: ['var(--font-zilla-slab)'],
         // roboto: ['var(--font-roboto)'],
       }
+*/
     },
   },
   plugins: [],

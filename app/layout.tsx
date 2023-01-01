@@ -1,13 +1,9 @@
 import './globals.css'
 import React from "react";
-import {Inter} from '@next/font/google'
+import localFont from '@next/font/local';
 import Navbar from "../components/Navbar";
 
-const inter = Inter({
-    subsets: ['latin'],
-    // weight: ['300', '400', '600', '900'],
-    //variable: '--font-inter',
-})
+const inter = localFont({ src: '../fonts/Inter.ttf'})
 
 //tailwind variable not yet working for me as of december 2022
 /*const zillaSlab = Zilla_Slab({
