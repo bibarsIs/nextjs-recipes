@@ -11,13 +11,24 @@ datasource db {
 model Ingredient {
   id      Int      @id @default(autoincrement())
   title   String   @db.VarChar(255) @unique
-  recipes Recipe[]
+  recipes RecipesOnIngredients[]
 }
 
 model Recipe {
   id           Int          @id @default(autoincrement())
   title        String       @db.VarChar(255)
   instructions String       @db.Text
-  ingredients  Ingredient[]
+  ingredients  RecipesOnIngredients[]
   createdAt    DateTime     @default(now()) @db.Timestamp(6)
+}
+
+model RecipesOnIngredients {
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+
+  quantity Decimal?
+
+  @@id([ingredientId, recipeId])
 }
