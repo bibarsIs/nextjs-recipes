@@ -1,7 +1,8 @@
 import RecipeItem from "./RecipeItem";
+import { Recipe } from "@prisma/client";
 
 export default function RecipesList({recipes}: {
-    recipes: any
+    recipes: Recipe[]
 }) {
     return (
         <ul>

@@ -19,7 +19,7 @@ async function main() {
     await prisma.recipe.create({
             data: {
                 title: 'omelette',
-                instructions: 'make an omelette and drizzle ketchup',
+                instructions: 'Make an omelette and drizzle ketchup',
                 ingredients: {
                     create: [
                         {
@@ -37,7 +37,7 @@ async function main() {
     await prisma.recipe.create({
             data: {
                 title: 'pancakes',
-                instructions: 'mix wet ingredients and fry',
+                instructions: 'Mix wet ingredients and fry',
                 ingredients: {
                     create: [
                         {
@@ -61,7 +61,7 @@ async function main() {
     await prisma.recipe.create({
             data: {
                 title: 'PBJ sandwich',
-                instructions: 'assemble the sandwich',
+                instructions: 'Assemble the sandwich',
                 ingredients: {
                     create: [
                         {

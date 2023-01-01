@@ -3,7 +3,9 @@ import React from "react";
 import localFont from '@next/font/local';
 import Navbar from "../components/Navbar";
 
-const inter = localFont({ src: '../fonts/Inter.ttf'})
+import {Inter} from '@next/font/google';
+
+//const inter = localFont({ src: '../fonts/Inter.ttf'})
 
 //tailwind variable not yet working for me as of december 2022
 /*const zillaSlab = Zilla_Slab({
@@ -11,12 +13,11 @@ const inter = localFont({ src: '../fonts/Inter.ttf'})
     variable: '--font-zilla-slab',
     weight: '400',
 })
-
-const roboto = Roboto({
+*/
+const inter = Inter({
     subsets: ['latin'],
-    variable: '--font-roboto',
-    weight: '100'
-})*/
+    weight: ['400', '500', '600']
+})
 
 
 export default function RootLayout({
