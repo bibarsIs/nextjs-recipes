@@ -21,7 +21,6 @@ export default function IngredientItem({ setAddedIngredients, setIngredients, ch
         setIngredients(prevIngredients => {
             const changedIngredientIndex = prevIngredients.findIndex(({title}) => title === ingredient.title)
             if (changedIngredientIndex) {
-                console.log(prevIngredients[changedIngredientIndex])
                 prevIngredients[changedIngredientIndex].isAdded = !prevIngredients[changedIngredientIndex].isAdded
                 return prevIngredients
             } else {
