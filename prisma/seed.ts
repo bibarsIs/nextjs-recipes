@@ -79,6 +79,23 @@ async function main() {
             }
         }
     )
+    await prisma.recipe.create({
+            data: {
+                title: 'french toast',
+                instructions: 'mix and fry',
+                ingredients: {
+                    create: [
+                        {
+                            ingredient: { connect: { title: 'egg' } }
+                        },
+                        {
+                            ingredient: { connect: { title: 'bread' } }
+                        },
+                    ]
+                }
+            }
+        }
+    )
 
     //  end of main()
 }

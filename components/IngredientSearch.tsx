@@ -3,7 +3,8 @@ import ButtonBrutal from "./buttons/ButtonBrutal";
 import React, { useState } from "react";
 import IngredientsList from "./ingredientLists/IngredientsList";
 import AddedIngredientsList from "./ingredientLists/AddedIngredientsList";
-import { Ingredient } from "@prisma/client";
+import { Ingredient, Recipe } from "@prisma/client";
+import RecipesList from "./recipes/RecipesList";
 
 
 export default function IngredientSearch({ ingredients }: {
@@ -15,8 +16,12 @@ export default function IngredientSearch({ ingredients }: {
     // ingredient in the input
     const [ingredient, setIngredient] = useState('')
 
-    function findRecipes() {
-        //
+    const [recipes, setRecipes] = useState<Recipe[]>([])
+    // on button click
+    async function findRecipes() {
+        const ingredients = addedIngredients.join()
+        const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ingredients}`)
+        setRecipes(await data.json())
     }
 
     // ingredient input change
@@ -41,6 +46,7 @@ export default function IngredientSearch({ ingredients }: {
                        className='p-2 m-4'/>
             </form>
             <ButtonBrutal type="submit" onClick={ findRecipes }>Search</ButtonBrutal>
+            <RecipesList recipes={recipes}></RecipesList>
             <h2>Added ingredients: </h2>
             <AddedIngredientsList addedIngredients={ addedIngredients } setAddedIngredients={ setAddedIngredients }/>
             <h2>All ingredients: </h2>
