@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     let recipes;
+    // if has query params
     if (ingredientsTitles.length !== 0) {
         recipes = await prisma.recipe.findMany({
             where: {
@@ -29,7 +30,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
     } else {
         recipes = await prisma.recipe.findMany()
-        console.log(recipes)
     }
     res.status(200).json(recipes)
 }

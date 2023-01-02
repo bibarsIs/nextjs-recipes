@@ -12,6 +12,9 @@ model Ingredient {
   id      Int      @id @default(autoincrement())
   title   String   @db.VarChar(255) @unique
   recipes RecipesOnIngredients[]
+
+  // to track if ingredient is added to users list. Not sure if this is the correct implementation.
+  isAdded Boolean @default(false)
 }
 
 model Recipe {

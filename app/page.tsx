@@ -7,13 +7,13 @@ export default async function Page() {
     if (!res.ok) {
         throw new Error('Failed to fetch data');
     }
-    const ingredients: Ingredient[] = await res.json()
+    const ingredientsFetched: Ingredient[] = await res.json()
 
     return (
         <div>
             <h1>Start entering the ingredient name to filter. Press enter to add the first ingredient in the list.</h1>
 
-            <IngredientSearch ingredients={ingredients}></IngredientSearch>
+            <IngredientSearch ingredientsFetched={ingredientsFetched}></IngredientSearch>
         </div>
     );
 

@@ -2,6 +2,7 @@
 CREATE TABLE "Ingredient" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
+    "isAdded" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Ingredient_pkey" PRIMARY KEY ("id")
 );
@@ -27,6 +28,9 @@ CREATE TABLE "RecipesOnIngredients" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Ingredient_title_key" ON "Ingredient"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Recipe_title_key" ON "Recipe"("title");
 
 -- AddForeignKey
 ALTER TABLE "RecipesOnIngredients" ADD CONSTRAINT "RecipesOnIngredients_ingredientId_fkey" FOREIGN KEY ("ingredientId") REFERENCES "Ingredient"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

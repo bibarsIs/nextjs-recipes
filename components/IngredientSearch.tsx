@@ -7,29 +7,31 @@ import { Ingredient, Recipe } from "@prisma/client";
 import RecipesList from "./recipes/RecipesList";
 
 
-export default function IngredientSearch({ ingredients }: {
-    ingredients: Ingredient[]
+export default function IngredientSearch({ ingredientsFetched }: {
+    ingredientsFetched: Ingredient[]
 }) {
 
+    const [ingredients, setIngredients] = useState<Ingredient[]>(ingredientsFetched)
     // addedIngredients used for searching recipes
-    const [addedIngredients, setAddedIngredients] = useState<string[]>([])
+    const [addedIngredients, setAddedIngredients] = useState<Ingredient[]>([])
     // ingredient in the input
     const [ingredient, setIngredient] = useState('')
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
     const [searchIsClicked, setSearchIsClicked] = useState(false)
     const [showResults, setShowResults] = useState(false)
+
     // on button click
     async function findRecipes() {
         setShowResults(true)
         setSearchIsClicked(true)
         const ingredients = addedIngredients.join()
-        const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ingredients}`)
+        const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ ingredients }`)
         const recipes = await data.json()
         setRecipes(recipes)
 
         //animate button press
-        await setTimeout(setSearchIsClicked, 100, false)
+        setSearchIsClicked(false)
     }
 
     // ingredient input change
@@ -54,15 +56,23 @@ export default function IngredientSearch({ ingredients }: {
                        className='p-2 m-4'/>
             </form>
 
-            <ButtonBrutal type="submit" onClick={ findRecipes } isClicked={searchIsClicked}>Search</ButtonBrutal>
-            {/*found recipes after button press*/}
-            {showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : ''}
-            {showResults && recipes.length===0 ? 'No recipes found' : <RecipesList recipes={recipes}></RecipesList>}
+            <ButtonBrutal type="submit" onClick={ findRecipes } isClicked={ searchIsClicked }>Search</ButtonBrutal>
+            {/*found recipes after button press*/ }
+            { showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : '' }
+            { showResults && recipes.length === 0 ? 'No recipes found' :
+                <RecipesList recipes={ recipes }></RecipesList> }
 
             <h2>Added ingredients: </h2>
-            <AddedIngredientsList addedIngredients={ addedIngredients } setAddedIngredients={ setAddedIngredients }/>
+            <AddedIngredientsList addedIngredients={ addedIngredients }
+                                  setAddedIngredients={ setAddedIngredients }
+                                  setIngredients={ setIngredients }
+
+            />
             <h2>All ingredients: </h2>
-            <IngredientsList ingredients={ ingredients } setAddedIngredients={ setAddedIngredients }></IngredientsList>
+            <IngredientsList ingredients={ ingredients }
+                             setAddedIngredients={ setAddedIngredients }
+                             setIngredients={ setIngredients }
+            ></IngredientsList>
         </div>
 
     );
