@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export default function IngredientItem({setAddedIngredients, children}: {
+export default function IngredientItem({ setAddedIngredients, children }: {
     children: string,
     setAddedIngredients: React.Dispatch<React.SetStateAction<string[]>>,
 }) {
@@ -19,7 +19,10 @@ export default function IngredientItem({setAddedIngredients, children}: {
     }
 
     return (
-        <li onClick={() => handleClick(children)}
-            className={`cursor-pointer select-none font-light m-2 ${isAdded ? 'line-through' : ''}`}>{children}</li>
+        <li onClick={ () => handleClick(children) }
+            className={ `
+            cursor-pointer select-none font-light m-2
+            bg-yellow-400 rounded
+            ${ isAdded ? 'line-through' : '' }` }>{ children }</li>
     );
 }

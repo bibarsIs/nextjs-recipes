@@ -5,20 +5,31 @@ const prisma = new PrismaClient()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const ingredientsString = req.query.ingredients as string
-    const ingredientsTitles = ingredientsString.split(',')
+    let ingredientsTitles: string[] = []
+    try {
+        ingredientsTitles = ingredientsString.split(',')
+    } catch (e) {
 
-    const recipes = await prisma.recipe.findMany({
-        where: {
-            ingredients: {
-                every: {
-                    ingredient: {
-                        title: {
-                            in: ingredientsTitles
+    }
+
+    let recipes;
+    if (ingredientsTitles.length !== 0) {
+        recipes = await prisma.recipe.findMany({
+            where: {
+                ingredients: {
+                    every: {
+                        ingredient: {
+                            title: {
+                                in: ingredientsTitles
+                            }
                         }
                     }
                 }
             }
-        }
-    })
+        });
+    } else {
+        recipes = await prisma.recipe.findMany()
+        console.log(recipes)
+    }
     res.status(200).json(recipes)
 }

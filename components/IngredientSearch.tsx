@@ -17,11 +17,19 @@ export default function IngredientSearch({ ingredients }: {
     const [ingredient, setIngredient] = useState('')
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
+    const [searchIsClicked, setSearchIsClicked] = useState(false)
+    const [showResults, setShowResults] = useState(false)
     // on button click
     async function findRecipes() {
+        setShowResults(true)
+        setSearchIsClicked(true)
         const ingredients = addedIngredients.join()
         const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ingredients}`)
-        setRecipes(await data.json())
+        const recipes = await data.json()
+        setRecipes(recipes)
+
+        //animate button press
+        await setTimeout(setSearchIsClicked, 100, false)
     }
 
     // ingredient input change
@@ -45,8 +53,12 @@ export default function IngredientSearch({ ingredients }: {
                        list='ingredients'
                        className='p-2 m-4'/>
             </form>
-            <ButtonBrutal type="submit" onClick={ findRecipes }>Search</ButtonBrutal>
-            <RecipesList recipes={recipes}></RecipesList>
+
+            <ButtonBrutal type="submit" onClick={ findRecipes } isClicked={searchIsClicked}>Search</ButtonBrutal>
+            {/*found recipes after button press*/}
+            {showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : ''}
+            {showResults && recipes.length===0 ? 'No recipes found' : <RecipesList recipes={recipes}></RecipesList>}
+
             <h2>Added ingredients: </h2>
             <AddedIngredientsList addedIngredients={ addedIngredients } setAddedIngredients={ setAddedIngredients }/>
             <h2>All ingredients: </h2>

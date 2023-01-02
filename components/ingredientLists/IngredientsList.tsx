@@ -8,7 +8,7 @@ export default function IngredientsList({ingredients, setAddedIngredients}: {
     setAddedIngredients: React.Dispatch<React.SetStateAction<string[]>>,
 }) {
     return (
-        <ul>
+        <ul className='flex flex-wrap w-full'>
             {ingredients.map((ingredient) => {
                 return <IngredientItem setAddedIngredients={setAddedIngredients}
                                        key={ingredient.id}>{ingredient.title}</IngredientItem>
