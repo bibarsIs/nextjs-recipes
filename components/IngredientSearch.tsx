@@ -25,7 +25,10 @@ export default function IngredientSearch({ ingredientsFetched }: {
     async function findRecipes() {
         setShowResults(true)
         setSearchIsClicked(true)
-        const ingredients = addedIngredients.join()
+        const ingredients = addedIngredients.map((addedIngredient) => {
+            return addedIngredient.title
+        }).join(',')
+        console.log(ingredients)
         const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ ingredients }`)
         const recipes = await data.json()
         setRecipes(recipes)
