@@ -5,8 +5,8 @@ const prisma = new PrismaClient()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const recipes = await prisma.recipe.findMany()
+    const ingredients = await prisma.ingredient.findMany()
 
 
-    res.status(200).json(recipes)
+    res.status(200).json(ingredients)
 }

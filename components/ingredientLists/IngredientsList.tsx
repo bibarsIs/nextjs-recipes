@@ -1,17 +1,17 @@
 import IngredientItem from "./IngredientItem";
-import React, {useEffect, useState} from "react";
+import React from "react";
+import { Ingredient } from "@prisma/client";
 
 //  List of ingredients to be added to user's lists
 export default function IngredientsList({ingredients, setAddedIngredients}: {
-    ingredients: string[],
+    ingredients: Ingredient[],
     setAddedIngredients: React.Dispatch<React.SetStateAction<string[]>>,
 }) {
-    const [isAdded, setIsAdded] = useState(false)
     return (
         <ul>
             {ingredients.map((ingredient) => {
                 return <IngredientItem setAddedIngredients={setAddedIngredients}
-                                       key={ingredient}>{ingredient}</IngredientItem>
+                                       key={ingredient.id}>{ingredient.title}</IngredientItem>
             })}
         </ul>
     )

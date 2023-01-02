@@ -8,7 +8,6 @@ export default function IngredientItem({setAddedIngredients, children}: {
 
     // adds ingredient to addedIngredients array
     function handleClick(ingredient: string) {
-        console.log('added')
         setAddedIngredients(prevState => {
             if (prevState.includes(ingredient)) {
                 return prevState.filter(word => word !== ingredient)

@@ -16,7 +16,7 @@ model Ingredient {
 
 model Recipe {
   id           Int          @id @default(autoincrement())
-  title        String       @db.VarChar(255)
+  title        String       @db.VarChar(255) @unique
   instructions String       @db.Text
   ingredients  RecipesOnIngredients[]
   createdAt    DateTime     @default(now()) @db.Timestamp(6)
