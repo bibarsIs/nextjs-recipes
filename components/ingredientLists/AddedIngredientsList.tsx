@@ -9,7 +9,7 @@ export default function AddedIngredientsList({ onClick, addedIngredients }: {
     addedIngredients: Ingredient[],
 }) {
 
-    // returns "None" when no ingredients selected
+    // renders "None" when no ingredients selected
     if (addedIngredients.length !== 0) {
         return (
             <ul className='inline-flex flex-row'>
@@ -22,7 +22,7 @@ export default function AddedIngredientsList({ onClick, addedIngredients }: {
         )
     } else {
         return (
-            <div className='font-light m-2 my-3'>None</div>
+            <div className='font-light m-2 my-4'>None</div>
         )
     }
 }

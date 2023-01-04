@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Ingredient } from "@prisma/client";
 import { Transition } from '@headlessui/react'
 
@@ -6,11 +6,10 @@ export default function AddedIngredientItem({ onClick, children: addedIngredient
     onClick: (addedIngredient: Ingredient) => void,
     children: Ingredient
 }) {
-    const [hasAppeared, setHasAppeared] = useState(false)
-    setTimeout(() => setHasAppeared(true), 0)
     return (
         <Transition
-            show={ hasAppeared }
+            appear={true}
+            show={ true }
             enter="transition-opacity duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"

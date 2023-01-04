@@ -9,7 +9,7 @@ export default function IngredientsList({ onClick, ingredients }: {
 }) {
 
     return (
-        <div className='flex flex-wrap w-full'>
+        <div className='flex flex-wrap w-full my-3'>
             { ingredients.map((ingredient) => {
                 return <IngredientItem onClick={onClick}
                                        key={ ingredient.id }
