@@ -28,7 +28,6 @@ export default function IngredientSearch({ ingredientsFetched }: {
         const ingredients = addedIngredients.map((addedIngredient) => {
             return addedIngredient.title
         }).join(',')
-        console.log(ingredients)
         const data = await fetch(`http://localhost:3000/api/recipes?ingredients=${ ingredients }`)
         const recipes = await data.json()
         setRecipes(recipes)
@@ -45,6 +44,45 @@ export default function IngredientSearch({ ingredientsFetched }: {
     // adds first filtered ingredient when user presses Enter key for convenience.
     function addFirstFilteredIngredient(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
+    }
+
+    // remove added ingredient when clicking on added ingredients list
+    function removeAddedIngredient(addedIngredient: Ingredient) {
+        setAddedIngredients(prevAddedIngredients => {
+            return prevAddedIngredients.filter(ingredient => {
+                return ingredient !== addedIngredient
+            })
+        })
+        setIngredients(prevIngredients => {
+            const changedIngredientIndex = prevIngredients.findIndex(({ title }) => title === addedIngredient.title)
+            if (changedIngredientIndex) {
+                prevIngredients[changedIngredientIndex].isAdded = false
+                return prevIngredients
+            } else {
+                return prevIngredients
+            }
+        })
+    }
+
+    // adds or removes ingredient to addedIngredients array
+    function handleIngredientClick(ingredient: Ingredient) {
+        setAddedIngredients(prevState => {
+            if (prevState.includes(ingredient)) {
+                return prevState.filter(prevIngredient => prevIngredient !== ingredient)
+            } else {
+                return [...prevState, ingredient] as Ingredient[]
+            }
+        })
+        // set isAdded false
+        setIngredients(prevIngredients => {
+            const changedIngredientIndex = prevIngredients.findIndex(({ title }) => title === ingredient.title)
+            if (changedIngredientIndex) {
+                prevIngredients[changedIngredientIndex].isAdded = !prevIngredients[changedIngredientIndex].isAdded
+                return prevIngredients
+            } else {
+                return prevIngredients
+            }
+        })
 
     }
 
@@ -59,23 +97,27 @@ export default function IngredientSearch({ ingredientsFetched }: {
                        className='p-2 m-4'/>
             </form>
 
-            <ButtonBrutal type="submit" onClick={ findRecipes } isClicked={ searchIsClicked }>Search</ButtonBrutal>
-            {/*found recipes after button press*/ }
-            { showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : '' }
-            { showResults && recipes.length === 0 ? 'No recipes found' :
-                <RecipesList recipes={ recipes }></RecipesList> }
+            <form onSubmit={ (event) => {
+                event.preventDefault()
+            } }>
+                <ButtonBrutal type="submit" onClick={ findRecipes } isClicked={ searchIsClicked }>Search</ButtonBrutal>
+                {/*found recipes after button press*/ }
+                { showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : '' }
+                { showResults && recipes.length === 0 ? 'No recipes found' :
+                    <RecipesList recipes={ recipes }></RecipesList> }
 
-            <h2>Added ingredients: </h2>
-            <AddedIngredientsList addedIngredients={ addedIngredients }
-                                  setAddedIngredients={ setAddedIngredients }
-                                  setIngredients={ setIngredients }
+                <h2>Added ingredients: </h2>
+                <AddedIngredientsList
+                    onClick={ (addedIngredient) => removeAddedIngredient(addedIngredient) }
+                    addedIngredients={ addedIngredients }
+                />
 
-            />
-            <h2>All ingredients: </h2>
-            <IngredientsList ingredients={ ingredients }
-                             setAddedIngredients={ setAddedIngredients }
-                             setIngredients={ setIngredients }
-            ></IngredientsList>
+                <h2>All ingredients: </h2>
+                <IngredientsList
+                    onClick={ (ingredient) => handleIngredientClick(ingredient) }
+                    ingredients={ ingredients }
+                ></IngredientsList>
+            </form>
         </div>
 
     );

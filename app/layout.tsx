@@ -1,3 +1,5 @@
+// noinspection ES6UnusedImports
+
 import './globals.css'
 import React from "react";
 import localFont from '@next/font/local';
