@@ -36,12 +36,12 @@ export default function IngredientSearch({ ingredientsFetched }: {
     }
 
     // ingredient input change
-    useEffect(() => {
-        setIngredients(ingredientsFetched.filter(ingredient => ingredient.title.includes(inputIngredient.toLowerCase())))
-    }, [ingredientsFetched, inputIngredient])
     function handleIngredientChange(event: { target: { value: React.SetStateAction<string>; }; }) {
         setInputIngredient(event.target.value)
     }
+    useEffect(() => {
+        setIngredients(ingredientsFetched.filter(ingredient => ingredient.title.includes(inputIngredient.toLowerCase())))
+    }, [ingredientsFetched, inputIngredient])
 
     // adds first filtered ingredient when user presses Enter key for convenience.
     function addFirstFilteredIngredient(event: React.FormEvent<HTMLFormElement>) {
@@ -89,7 +89,6 @@ export default function IngredientSearch({ ingredientsFetched }: {
     return (
             <div>
                 <form onSubmit={ addFirstFilteredIngredient }>
-                    {inputIngredient}
                     <input type='text' autoComplete='off' placeholder='Ingredient'
                            value={ inputIngredient }
                            onChange={ handleIngredientChange }
