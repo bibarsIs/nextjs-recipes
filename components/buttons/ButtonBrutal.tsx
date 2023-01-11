@@ -18,8 +18,9 @@ export default function ButtonBrutal({type, onClick, isClicked, children} : {
 
     return (
         <button type={type} onClick={onClick} className={` 
-        font-medium border-4 border-black p-3 m-2 rounded-xl ${zillaSlab.variable}
+        font-medium border-4 border-black p-3 m-2 rounded-xl ${zillaSlab.variable} 
         ${isClicked ? 'translate-x-2 translate-y-2 shadow-sm' : 'shadow-brutal shadow-yellow-400'}   
+        hover:border-yellow-300
         transition`}>
             {children}
         </button>

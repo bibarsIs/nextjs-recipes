@@ -12,7 +12,9 @@ export default function IngredientSearch({ ingredientsFetched }: {
 
     const [ingredients, setIngredients] = useState<Ingredient[]>(ingredientsFetched)
     // addedIngredients used for searching recipes
-    const [addedIngredients, setAddedIngredients] = useState<Ingredient[]>([])
+    const [addedIngredients, setAddedIngredients] = useState<Ingredient[]>(ingredientsFetched.filter((ingredient) => {
+        return ingredient.isAdded
+    }))
     // ingredient in the input
     const [inputIngredient, setInputIngredient] = useState('')
 
@@ -20,7 +22,7 @@ export default function IngredientSearch({ ingredientsFetched }: {
     const [searchIsClicked, setSearchIsClicked] = useState(false)
     const [showResults, setShowResults] = useState(false)
 
-    // on button click
+    // on search button click
     async function findRecipes() {
         setShowResults(true)
         setSearchIsClicked(true)

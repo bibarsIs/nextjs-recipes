@@ -1,12 +1,8 @@
 import RecipesList from "../../components/recipes/RecipesList";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient()
 
 export default async function Page() {
     const response = await fetch('http://localhost:3000/api/recipes')
     const recipes = await response.json()
-
     return (
         <div>
             <h1 className='text-2xl'>All recipes</h1>

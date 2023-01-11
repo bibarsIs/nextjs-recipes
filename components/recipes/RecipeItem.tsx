@@ -6,8 +6,7 @@ export default function RecipeItem({ recipe }: {
 }) {
     return (
             <div>
-                <h3 className='font-medium text-xl capitalize'><Link href={`/recipes/${recipe.title}`} >{ recipe.title }</Link></h3>
-                { recipe.instructions }
+                <h3 className='font-medium text-xl capitalize hover:underline'><Link href={`/recipes/${recipe.title}`} >{ recipe.title }</Link></h3>
             </div>
     );
 }
