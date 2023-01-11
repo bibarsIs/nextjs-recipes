@@ -101,7 +101,7 @@ export default function IngredientSearch({ ingredientsFetched }: {
                     event.preventDefault()
                 } }>
                     <ButtonBrutal type="submit" onClick={ findRecipes }
-                                  isClicked={ searchIsClicked }>Search</ButtonBrutal>
+                                  isClicked={ searchIsClicked }>{!searchIsClicked ? 'Search' : 'Searching...'}</ButtonBrutal>
                     {/*found recipes after button press*/ }
                     { showResults ? <h2 className='font-semibold text-2xl'>Found recipes: </h2> : '' }
                     { showResults && recipes.length === 0 ? 'No recipes found' :
