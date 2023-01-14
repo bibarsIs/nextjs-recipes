@@ -8,9 +8,18 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  name           String
+  password       String
+  favorites      Recipe[] @relation(name: "UserFavoritedRecipes")
+  createdRecipes Recipe[] @relation(name: "UserCreatedRecipes")
+}
+
 model Ingredient {
-  id      Int      @id @default(autoincrement())
-  title   String   @db.VarChar(255) @unique
+  id      Int                    @id @default(autoincrement())
+  title   String                 @unique @db.VarChar(255)
   recipes RecipesOnIngredients[]
 
   // to track if ingredient is added to users list. Not sure if this is the correct implementation.
@@ -18,18 +27,21 @@ model Ingredient {
 }
 
 model Recipe {
-  id           Int          @id @default(autoincrement())
-  title        String       @db.VarChar(255) @unique
-  instructions String       @db.Text
-  ingredients  RecipesOnIngredients[]
-  createdAt    DateTime     @default(now()) @db.Timestamp(6)
+  id              Int                    @id @default(autoincrement())
+  title           String                 @unique @db.VarChar(255)
+  instructions    String                 @db.Text
+  ingredients     RecipesOnIngredients[]
+  createdAt       DateTime               @default(now()) @db.Timestamp(6)
+  favoritedBy     User[]                 @relation(name: "UserFavoritedRecipes")
+  createdBy       User?                  @relation(name: "UserCreatedRecipes", fields: [createdByUserId], references: [id])
+  createdByUserId Int?                   @default(1)
 }
 
 model RecipesOnIngredients {
-  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId Int
-  recipe Recipe @relation(fields: [recipeId], references: [id])
-  recipeId Int
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
 
   quantity Decimal?
 

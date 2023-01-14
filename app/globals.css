@@ -21,3 +21,6 @@ input {
         @apply font-medium
     }
 }
+ul {
+    list-style-position: inside;
+}

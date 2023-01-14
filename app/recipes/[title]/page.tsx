@@ -24,6 +24,7 @@ export default async function Page({params}: {
             { recipe.ingredients.map((ingredientObject) => (
                 <li key={ingredientObject.ingredientId}>
                     {ingredientObject.ingredient.title}
+                    <span>{ingredientObject.quantity !== null ? ingredientObject.quantity.toString() : ''}</span>
                 </li>
             ))}
             </ol>

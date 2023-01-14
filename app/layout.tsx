@@ -1,11 +1,11 @@
 // noinspection ES6UnusedImports
 
 import './globals.css'
-import React from "react";
+import React from 'react';
 import localFont from '@next/font/local';
-import Navbar from "../components/Navbar";
+import Navbar from '../components/Navbar';
 
-import {Inter} from '@next/font/google';
+import { Inter } from '@next/font/google';
 
 //const inter = localFont({ src: '../fonts/Inter.ttf'})
 
@@ -29,12 +29,12 @@ export default function RootLayout({
 }) {
 
     return (
-        <html lang='en' className={inter.className}>
+        <html lang="en" className={ inter.className }>
         <body>
-        <div className='font-roboto'>
+        <div className="font-roboto">
             <Navbar></Navbar>
         </div>
-        {children}
+        { children }
         </body>
         </html>
     );

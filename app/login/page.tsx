@@ -1,8 +1,6 @@
 'use client'
 import { useForm, SubmitHandler } from 'react-hook-form';
-import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
 import MyButton from '../../components/buttons/MyButton';
 import React from 'react';
 import { signIn } from 'next-auth/react';

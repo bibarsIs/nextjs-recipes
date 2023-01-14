@@ -22,7 +22,7 @@ export default function AddedIngredientsList({ onClick, addedIngredients }: {
         )
     } else {
         return (
-            <div className='font-light m-2 my-4'>None</div>
+            <div className='font-light m-2 my-4'>None added</div>
         )
     }
 }

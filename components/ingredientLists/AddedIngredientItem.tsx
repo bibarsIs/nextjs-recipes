@@ -18,7 +18,7 @@ export default function AddedIngredientItem({ onClick, children: addedIngredient
             leaveTo="opacity-0"
         >
             <li onClick={ () => onClick(addedIngredient) }
-                className={ `cursor-pointer select-none font-light m-2 p-2 px-4 bg-rose-800 text-white rounded-full` }>
+                className={ `cursor-pointer select-none font-light m-2 p-2 px-4 bg-rose-800 text-white rounded-full border-2 border-black` }>
                 { addedIngredient.title } x
             </li>
         </Transition>

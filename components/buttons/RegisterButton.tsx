@@ -25,8 +25,18 @@ export function RegisterButton() {
         setOpen(false)
     }
 
-    const handleRegisterSubmit: SubmitHandler<formData> = (data: formData) => {
-        console.log(data)
+    // Handel Register Form submit
+    const handleRegisterSubmit: SubmitHandler<formData> = async (data: formData) => {
+        const response = await fetch('http://localhost:3000/api/register', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.ok) {
+            console.log('Registered successfully')
+        }
     }
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<formData>();
@@ -76,7 +86,7 @@ export function RegisterButton() {
                             {...register("password", {required: true, minLength: 6})}
                         />
                         {errors.password?.type === 'required' && <span className='text-red-500'>Password is required</span>}
-                        {errors.password?.type === 'minLength' && <span className='text-red-500'>Password must be at least 6 chacters long</span>}
+                        {errors.password?.type === 'minLength' && <span className='text-red-500'>Password must be at least 6 characters long</span>}
                     </DialogContent>
                     <DialogActions className='font-serif'>
                         <MyButton type='submit'>Submit</MyButton>

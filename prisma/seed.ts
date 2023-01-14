@@ -15,7 +15,23 @@ async function main() {
             { title: 'bread' },
         ]
     })
+    await prisma.user.createMany({
+        data: [
+            {
+                id: 1,
+                email: 'biba@biba.com',
+                name: 'biba',
+                password: 'password',
+            },
+            {
+                id: 2,
+                email: 'biba2@biba.com',
+                name: 'biba2',
+                password: 'password',
 
+            }
+        ]
+    })
     await prisma.recipe.create({
             data: {
                 title: 'omelette',
